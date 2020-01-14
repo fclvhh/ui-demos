@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>sticky demo</title>
+    <style>
+      .sticky {
+        position: fixed;
+        top: 0;
+        left: 0;
+        opacity: 0.5;
+      }
+
+      /*-------------------*/
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #topbar {
+        background: green;
+        height: 60px;
+        color: white;
+        text-align: center;
+      }
+
+      .topbarPlaceholder {
+        height: 60px;
+      }
+
+      main {
+        background: #ddd;
+        height: 1800px;
+      }
+
+      #topbar.sticky {
+        width: 100%;
+      }
+      button.sticky {
+        position: fixed;
+        top: 60px;
+        left: 0;
+      }
+      .buttonPlacehold {
+        height: 21px
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbarPalceHold">
+      <div id="topbar">
+        topbar
+      </div>
+    </div>
+    <main>
+      主要内容
+      <p>段落1</p>
+      <p>段落2</p>
+      <p>段落3</p>
+      <p>段落4</p>
+      <p>段落5</p>
+      <p>段落6</p>
+      <p>段落7</p>
+      <p>段落8</p>
+      <p>段落9</p>
+      <p>段落10</p>
+      <div class="buttonPlacehold">
+        <button>黏住的按钮</button>
+      </div>
+      <p>段落11111111111</p>
+    </main>
+    <script src="../node_modules/jQuery/tmp/jquery.js"></script>
+    <script>
+      //思路:用户滚动时添加class sticky , 停止时 , 去除sticky
+      // 问题 : 文当高度会丢失 , 用一个东西占位
+      window.onload = function() {
+        let topbar = $("#topbar")
+        let button = $('button')
+        topbarTop = topbar.offset().top
+        buttonTop = button.offset().top
+        $(window).on("scroll", function() {
+          let scrollY = window.scrollY
+          if(scrollY+0 > topbarTop) {
+            topbar.addClass('sticky')
+          }else{
+            topbar.removeClass('sticky')
+          }
+          if(scrollY + 60 > buttonTop-60) {
+            button.addClass('sticky')
+          }else {
+            button.removeClass('sticky')
+          }
+        })
+
+      }
+    </script>
+  </body>
+</html>

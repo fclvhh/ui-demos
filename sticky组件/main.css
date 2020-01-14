@@ -1,0 +1,26 @@
+.sticky{
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/*-------用户自己写的样式------------*/
+
+
+*{margin:0;padding:0;}
+
+#topbar{
+  background: green;
+  height: 60px;
+  color: white;
+  text-align: center;
+}
+
+main{
+  background: #ddd;
+  height: 1800px;
+}
+
+#topbar.sticky{
+  width: 100%;
+}
