@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>初步思路</title>
+    <style>
+      .tabs > ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .tabs > ol.tabs-bar {
+        display: flex;
+        border-bottom: 1px solid red;
+      }
+      .tabs > ol.tabs-bar > li {
+        padding: 4px 8px;
+        border: 1px solid transparent;
+        border-bottom: 0;
+      }
+      .tabs > ol.tabs-bar > li:hover {
+        border-color: red;
+      }
+
+      .tabs > ol.tabs-bar > li.active {
+        border-color: blue;
+      }
+      .tabs > ol.tabs-content > li {
+        display: none;
+      }
+      .tabs > ol.tabs-content > li.active {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="tabs">
+      <ol class="tabs-bar">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ol>
+      <ol class="tabs-content">
+        <li>content 1</li>
+        <li>content 2</li>
+        <li>content 3</li>
+      </ol>
+    </div>
+    <hr>
+    <div class="tabs">
+      <ol class="tabs-bar">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ol>
+      <ol class="tabs-content">
+        <li>content 1</li>
+        <li>content 2</li>
+        <li>content 3</li>
+      </ol>
+    </div>
+  </body>
+  <script src="../node_modules/jQuery/tmp/jquery.js"></script>
+  <script>
+  window.onload = function() {
+    let $tabsBar = $(".tabs-bar")
+    $tabsBar.on('click','li',function(e){
+      let index = $(e.target).index()
+      $(e.target).addClass("active").
+        siblings().removeClass("active")
+      // 这段代码的坏处 : 无法保证外外面只有一个tabs-content , 兼容性不好
+      // $('.tabs-content').find('li')
+      // .eq(index).addClass("active").siblings().removeClass("active")
+      $(e.target).closest(".tabs").find(".tabs-content > li").eq(index)
+      .addClass("active").siblings().removeClass("active")
+    })
+    $('.tabs').each(function(index,element){
+      $(element).children('.tabs-bar').find("li").eq(0).trigger('click')
+    })
+  }
+  
+  </script>
+</html>
