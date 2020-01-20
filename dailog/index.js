@@ -16,16 +16,18 @@ window.onload = function() {
         return $b
       })
       var template = `
-        <div class="fcdadaDialog">
-          <header>${title}</header>
-          <main>${content}</main>
-          <footer></footer>
+      <div class="frankDialog">
+        <div class="frankDialog-wrapper">
+          <header class="frankDialog-header">${title}</header>
+          <main class="frankDialog-main">${content}</main>
+          <footer class="frankDialog-footer"></footer>
         </div>
+      </div>
       `
       var $dialog = $(template)
       //把按钮插入到$dialog元素中
       $buttons.forEach(($button)=>{
-        $dialog.append($button)
+        $dialog.find('footer').append($button)
       })
       this.$dialog = $dialog
     }
